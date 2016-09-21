@@ -1,0 +1,22 @@
+.foto-alimento {
+
+	width: 350px;
+	max-width: 350px;
+	height: 280px;
+	max-height: 280px;
+}
+
+.sin-foto {
+	width: 280px;
+	max-width: 280px;
+	height: 280px;
+	max-height: 280px;	
+}
+
+.barra-tareas {
+	margin-bottom: 2em;
+}
+
+footer {
+	margin-top: 3em;
+}

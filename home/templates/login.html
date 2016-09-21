@@ -1,0 +1,63 @@
+{% extends 'master.html' %}
+
+{% load static from staticfiles %}
+
+{% block title %}
+	Reserva de alimentos - Login
+{% endblock title %}
+
+{% block contenido %}
+
+<div class="container">
+
+	<div class="row">
+		<div class="col-md-12">
+			<div class="page-header">
+				<h2>Bienvenido Administrador</h2>
+			</div>
+		</div>
+	</div>
+
+	<form method="POST" action="" role="form">
+		{% csrf_token %}
+		
+		<div class="form-group">
+			<label for="username">Usuario</label>
+			<div class="input-group">
+				<span class="input-group-addon">
+					<span class="glyphicon glyphicon-user"></span>
+				</span>
+				<input class="form-control" type="text" id="username" name="user" placeholder="Nombre de usuario">	
+			</div>
+		</div>			
+
+		<div class="form-group">
+			<label for="password">Contraseña</label>
+			<div class="input-group">
+				<span class="input-group-addon">
+					<span class="glyphicon glyphicon-lock"></span>
+				</span>
+				<input class="form-control" type="password" id="password" name="password">							
+			</div>
+		</div>
+
+		{% if mensaje %}
+		<div class="row">
+			<div class="col-md-12">
+				<div class="alert alert-danger">
+					<button class="close" data-dismiss="alert"><span>&times;</span></button>					
+					{{ mensaje }}
+				</div>
+			</div>	
+		</div>
+		{% endif %}
+		
+		<div class="form-group">
+			<button class="btn btn-primary">Aceptar</button>	
+		</div>
+		
+	</form>
+	
+</div>
+
+{% endblock contenido %}

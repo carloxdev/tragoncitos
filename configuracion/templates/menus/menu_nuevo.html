@@ -1,0 +1,25 @@
+{% extends 'master.html' %}
+
+{% load static from staticfiles %}
+
+{% block title %} Nuevo Menu {% endblock title %}
+
+{% block contenido %}
+
+	<form action="" method="POST" enctype="multipart/form-data">
+
+		{% csrf_token %}
+		{{ form.as_p }}
+
+		<button type="submit">Guardar</button>
+	</form>
+
+	{% if mensaje %}
+		<div>
+			{{ mensaje }}
+		</div>
+		
+	{% endif %}
+
+
+{% endblock contenido %}

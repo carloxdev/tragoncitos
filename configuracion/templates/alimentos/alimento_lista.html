@@ -1,0 +1,86 @@
+{% extends 'master.html' %}
+
+{% load static from staticfiles %}
+
+{% block title %} Lista de Alimentos {% endblock title %}
+
+{% block contenido %}
+
+<div class="container-fluid">
+	<ol class="breadcrumb">
+		<li class="active">Lista de Alimentos</li>
+	</ol>			
+
+	<div class="row barra-tareas">
+		<div class="col-md-12">
+			<a href="{% url 'config.alimento_nuevo' %}" class="btn btn-info">Nuevo Alimento</a>
+		</div>
+	</div>
+
+	<div class="row">
+		{% for alimento in alimentos %}
+		<div class="col-md-6">
+			<div class="panel 
+			{% if alimento.activo is True %}
+				panel-success
+			{% else %}	
+				panel-default
+			{% endif %}">
+				<div class="panel-heading">
+					{{ alimento.nombre }} <span class="badge">{{ alimento.get_tipo_display }}</span>
+				</div>
+				<div class="panel-body">
+					<div class="media">
+
+						<div class="media-left media-middle">
+							{% if  alimento.foto %}
+							<img src="{{ MEDIA_URL }}{{ alimento.foto }}" class="pull-left foto-alimento thumbnail hidden-sm hidden-xs hidden-md" alt="imagen">
+							{% else %}
+							<img src="{{ MEDIA_URL }}alimentos/no-image.jpg" class="pull-left sin-foto thumbnail hidden-sm hidden-xs hidden-md" alt="imagen">
+							{% endif %}									
+						</div>
+
+						<div class="media-body">
+							<h4 class="media-heading">Descripcion:</h4>
+							<p>
+								{{ alimento.descripcion }}
+							</p>
+						</div>
+
+					</div>
+				</div>
+
+				<div class="panel-footer">
+					<a href="{% url 'config.alimento_editar' alimento.pk %}" class="btn btn-primary">Editar</a>
+				</div>
+			</div>
+		</div>
+		{% endfor %}
+	</div>
+
+	<div class="row">
+		<div class="col-md-12">
+			<nav>
+			    {% if is_paginated %}
+			        <ul class="pagination">
+			            {% if page_obj.has_previous %}
+			                <li><a href="?page={{ page_obj.previous_page_number }}">&laquo;</a></li>
+			            {% endif %}
+
+			            {% for i in paginator.page_range %}
+			                <li {% if page_obj.number == i %} class="active" {% endif %}>
+			                    <a href="?page={{i}}">{{ i }}</a>
+			                </li>
+			            {% endfor %}
+
+			            {% if page_obj.has_next %}
+			                <li><a href="?page={{ page_obj.next_page_number }}">&raquo;</a></li>
+			            {% endif %}
+			        </ul>
+			    {% endif %}
+			</nav>
+		</div>
+	</div>
+</div>
+
+{% endblock contenido %}

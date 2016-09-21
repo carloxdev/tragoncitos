@@ -1,0 +1,39 @@
+{% extends 'master.html' %}
+
+{% load static from staticfiles %}
+
+{% block title %} Reservacion de comida {% endblock title %}
+
+{% block contenido %}
+
+<div class="container">
+	
+	<div class="row">
+		<div class="col-md-12">
+			<div class="page-header">
+				<h3>{{ alimento.get_tipo_display }} : {{ alimento.nombre }}</h3>
+			</div>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-md-6">
+			{{ alimento.descripcion }}
+		</div>
+
+		<div class="col-md-6">
+
+			{% if  alimento.foto %}
+			<img src="{{ MEDIA_URL }}{{ alimento.foto }}" class="img-responsive img-thumbnail" alt="imagen">
+			{% else %}
+			<img src="{{ MEDIA_URL }}alimentos/no-image.jpg" class="img-responsive img-thumbnail" alt="imagen">
+
+			{% endif %}
+
+		</div>
+	</div>	
+
+</div>
+
+
+{% endblock contenido %}

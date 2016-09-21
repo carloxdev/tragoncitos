@@ -1,0 +1,40 @@
+{% extends 'master.html' %}
+
+{% load static from staticfiles %}
+
+{% block title %} Nuevo Alimento {% endblock title %}
+
+{% block contenido %}
+
+<div class="container-fluid">
+
+	<ol class="breadcrumb">
+		<li><a href="{% url 'config.alimento_lista' %}">Lista de Alimentos</a></li>
+		<li class="active">Nuevo</li>
+	</ol>
+
+	<form action="" method="POST" enctype="multipart/form-data">
+
+		{% csrf_token %}
+		{{ form.as_p }}
+
+
+		{% if mensaje %}
+		<div class="row">
+			<div class="col-md-12">
+				<div class="alert alert-danger">
+					<button class="close" data-dismiss="alert"><span>&times;</span></button>					
+					{{ mensaje }}
+				</div>
+			</div>	
+		</div>
+		{% endif %}
+
+		<div class="form-group">
+			<button class="btn btn-primary" type="submit">Guardar</button>	
+		</div>
+	</form>	
+
+</div>
+
+{% endblock contenido %}

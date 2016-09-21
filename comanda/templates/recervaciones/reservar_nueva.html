@@ -1,0 +1,258 @@
+
+{% extends 'master.html' %}
+
+{% load static from staticfiles %}
+
+{% block title %} Reservacion de comida {% endblock title %}
+
+{% block css %}
+	<link rel='stylesheet' href="{% static 'libs/fullcalendar/fullcalendar.css' %}" />
+	<link rel="stylesheet" href="{% static 'recervaciones/reservar_nueva.css' %}" />
+{% endblock css %}
+
+{% block contenido %}
+
+<form action="" method="POST" role="form">
+	{% csrf_token %}
+	<div class="container">
+
+		<div class="row">
+			<div class="col-md-12">
+				<div class="page-header">
+					<h3>Menu del: <strong>{{ dia }}</strong></h3>
+				</div>
+			</div>
+		</div>
+
+		{% if mensaje %}
+
+		<div class="row">
+			<div class="col-md-12">
+				<div class="alert alert-warning">
+					<strong>{{ mensaje }}</strong>
+				</div>
+			</div>	
+		</div>
+
+		{% else %}
+		
+		<div class="row">
+			<div class="col-md-12">
+				<ul class="list-group">
+					<li class="list-group-item disabled">ENTRADAS:</li>
+					{% if entradas %}
+						{% for entrada in entradas %}
+						<label class="list-group-item custom-control custom-radio">
+							<input type="radio" name="entrada" class="custom-control-input" value="{{entrada.pk}}">
+							<span class="custom-control-indicator"></span>
+							<span class="custom-control-description">{{entrada.nombre}}</span>
+						</label>
+						{% endfor %}
+					{% else %}
+						<li class="list-group-item"><h4>Sin entradas para este dia</h4></li>
+					{% endif %}
+				</ul>
+			</div>			
+		</div>
+
+		<div class="row">
+			<div class="col-md-12">
+				<ul class="list-group">
+					<li class="list-group-item disabled">PLATOS FUERTES:</li>
+					{% if platos_fuertes %}
+						{% for plato_fuete in platos_fuertes %}
+						<label class="list-group-item custom-control custom-radio">
+							<input type="radio" name="plato_fuete" class="custom-control-input" value="{{plato_fuete.pk}}">
+							<span class="custom-control-indicator"></span>
+							<span class="custom-control-description">{{plato_fuete.nombre}}</span>
+						</label>							
+						{% endfor %}
+					{% else %}
+						<li class="list-group-item"><h4>Sin Platos Fuertes para este dia</h4></li>
+					{% endif %}
+				</ul>				
+			</div>						
+		</div>
+
+		<div class="row">
+			<div class="col-md-12">
+				<ul class="list-group">
+					<li class="list-group-item disabled">GUARNICIONES:</li>
+					{% if guarniciones %}
+						{% for guarnicion in guarniciones %}
+						<label class="list-group-item custom-control custom-radio">
+							<input type="radio" name="guarnicion" class="custom-control-input" value="{{guarnicion.pk}}">
+							<span class="custom-control-indicator"></span>
+							<span class="custom-control-description">{{guarnicion.nombre}}</span>
+						</label>							
+						{% endfor %}
+					{% else %}
+						<li class="list-group-item"><h4>Sin Guarniciones para este dia</h4></li>
+					{% endif %}
+				</ul>				
+			</div>						
+		</div>
+
+		<div class="row">
+			<div class="col-md-12">
+				<ul class="list-group">
+					<li class="list-group-item disabled">ENSALADAS:</li>
+					{% if ensaladas %}
+						{% for ensalada in ensaladas %}
+						<label class="list-group-item custom-control custom-radio">
+							<input type="radio" name="ensalada" class="custom-control-input" value="{{ensalada.pk}}">
+							<span class="custom-control-indicator"></span>
+							<span class="custom-control-description">{{ensalada.nombre}}</span>
+						</label>
+						{% endfor %}
+					{% else %}
+						<li class="list-group-item"><h4>Sin Ensaladas para este dia</h4></li>
+					{% endif %}	
+				</ul>
+			</div>
+		</div>		
+
+		<div class="row">
+			<div class="col-md-12">
+				<ul class="list-group">
+					<li class="list-group-item disabled">POSTRES:</li>
+					{% if postres %}
+						{% for postre in postres %}
+						<label class="list-group-item custom-control custom-radio">
+							<input type="radio" name="postre" class="custom-control-input" value="{{postre.pk}}">
+							<span class="custom-control-indicator"></span>
+							<span class="custom-control-description">{{postre.nombre}}</span>
+						</label>					
+						{% endfor %}
+					{% else %}
+						<li class="list-group-item"><h4>Sin Postres para este dia</h4></li>
+					{% endif %}	
+				</ul>				
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-md-12">
+				<ul class="list-group">
+					<li class="list-group-item disabled">AGUAS:</li>
+					{% if aguas %}
+						{% for agua in aguas %}
+						<label class="list-group-item custom-control custom-radio">
+							<input type="radio" name="agua" class="custom-control-input" value="{{agua.pk}}">
+							<span class="custom-control-indicator"></span>
+							<span class="custom-control-description">{{agua.nombre}}</span>
+						</label>
+						{% endfor %}
+					{% else %}
+						<li class="list-group-item"><h4>Sin Aguas para este dia</h4></li>
+					{% endif %}				
+				</ul>					
+			</div>		
+		</div>
+
+		<div class="row">
+			<div class="col-md-12">
+				
+				<div class="panel panel-default">
+					<div class="panel-heading">DATOS DEL TRAGONCITO:</div>
+					<div class="panel-body">
+							
+							<div class="form-group">
+								<label for="id_persona">Persona:</label>
+								<div class="input-group">
+									<span class="input-group-addon">
+										<span class="glyphicon glyphicon-user"></span>
+									</span>
+									<input class="form-control" type="text" id="id_persona" name="id_persona" placeholder="Nombre del Tragoncito" required="true">
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label for="id_empresa">Empresa:</label>
+								<div class="input-group">
+									<span class="input-group-addon">
+										<span class="glyphicon glyphicon-home"></span>
+									</span>							
+									<input class="form-control" type="text" id="id_empresa" name="id_empresa" placeholder="Donde trabaja el Tragoncito">
+								</div>
+							</div>								
+							
+							<div class="form-group">
+								<label for="id_correo">Email:</label>
+								<div class="input-group">
+									<span class="input-group-addon">
+										<span class="glyphicon glyphicon-envelope"></span>
+									</span>							
+									<input class="form-control" type="text" id="id_correo" name="id_correo" placeholder="">
+								</div>
+							</div>	
+
+							<div class="form-group">
+								<label for="id_comentarios">Comentarios:</label>
+								<textarea class="form-control"  rows="4" name="id_comentarios" id="id_comentarios"></textarea>
+							</div>
+					</div>		
+				</div>				
+			</div>		
+		</div>
+
+		{% endif %}
+
+		{% if error %}
+		<div class="row">
+			<div class="col-md-12">
+				<div class="alert alert-danger">
+					<button class="close" data-dismiss="alert"><span>&times;</span></button>					
+					{{ error }}
+				</div>
+			</div>	
+		</div>
+		{% endif %}
+
+		<div class="row">
+			<div class="col-md-12">
+
+				{% if mensaje == '' %}
+				<button class="btn pull-left btn-primary">Reservar</button>
+				{% endif %}
+
+				<a href="#win_calendar" class="btn pull-right btn-warning" data-toggle="modal">Mostrar Menus de otros dias</a>
+
+				<div class="modal fade" id="win_calendar">
+					<div class="modal-dialog">
+						<div class="modal-content">
+
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+								<h4 class="modal-title">Selecciona dia a reservar:</h4>
+							</div>
+
+							<div class="modal-body">
+								
+								<div id="calendario">
+								</div>	
+							</div>
+							
+						</div>
+					</div>
+				</div>
+
+
+			</div>
+		</div>
+
+	</div>
+</form>
+
+{% endblock contenido %}
+
+{% block scripts %}
+	
+	<script src="{% static 'libs/fullcalendar/lib/moment.min.js' %}">></script>
+	<script src="{% static 'libs/fullcalendar/fullcalendar.js' %}">></script>
+	<script src="{% static 'libs/fullcalendar/locale/es.js' %}"></script>
+
+	<script src="{% static 'recervaciones/reservar_nueva.js' %}">></script>
+
+{% endblock scripts %}
+

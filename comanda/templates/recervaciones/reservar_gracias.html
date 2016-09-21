@@ -1,0 +1,75 @@
+{% extends 'master.html' %}
+
+{% load static from staticfiles %}
+
+{% block title %} Reservacion de comida - Gracias {% endblock title %}
+
+{% block css %}
+	<link rel='stylesheet' href="{% static 'libs/fullcalendar/fullcalendar.css' %}" />
+
+{% endblock css %}
+
+{% block contenido %}
+
+<div class="container">
+	<div class="jumbotron">
+
+		<div class="row">
+			<div class="col-md-12">
+				<div class="page-header">
+					<h2>Gracias <strong>{{ reservacion.persona}}</strong> por reservar</h2>
+				</div>
+			</div>
+		</div>
+		
+		<h4>Tu reservacion incluye:</h4>
+
+		<p> 
+			<div> <strong>Entrada:</strong>  {% if reservacion.entrada %} {{ reservacion.entrada }} {% else %} -- {% endif %}</div>
+			<div> <strong>Plato Fuerte:</strong> {% if reservacion.plato_fuerte %} {{ reservacion.plato_fuerte }} {% else %} -- {% endif %}</div>
+			<div> <strong>Guarnicion:</strong> {% if reservacion.guarnicion %} {{ reservacion.guarnicion }} {% else %} -- {% endif %}</div>
+			<div> <strong>Ensalada: </strong> {% if reservacion.ensalada %} {{ reservacion.ensalada }} {% else %} -- {% endif %}</div>
+			<div> <strong>Postre: </strong> {% if reservacion.postre %} {{ reservacion.postre }} {% else %} -- {% endif %}</div>
+			<div> <strong>Agua: </strong> {% if reservacion.agua %} {{ reservacion.agua }} {% else %} -- {% endif %}</div>
+			<div> <strong>Comentarios: </strong> {% if reservacion.comentarios %} {{ reservacion.comentarios }} {% else %} -- {% endif %}</div>
+		</p>
+
+		<p>
+			<button class="btn disabled">Editar reservacion</button>	
+			<a href="#win_calendar" class="btn btn-warning" data-toggle="modal">Mostrar Menus de otros dias</a>
+
+			<div class="modal fade" id="win_calendar">
+				<div class="modal-dialog">
+					<div class="modal-content">
+
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+							<h4 class="modal-title">Selecciona dia a reservar:</h4>
+						</div>
+
+						<div class="modal-body">
+							
+							<div id="calendario">
+							</div>	
+						</div>
+						
+					</div>
+				</div>
+			</div>
+		</p>
+
+	</div>
+
+</div>
+
+{% endblock contenido %}
+
+{% block scripts %}
+	
+	<script src="{% static 'libs/fullcalendar/lib/moment.min.js' %}">></script>
+	<script src="{% static 'libs/fullcalendar/fullcalendar.js' %}">></script>
+	<script src="{% static 'libs/fullcalendar/locale/es.js' %}"></script>
+
+	<script src="{% static 'recervaciones/reservar_gracias.js' %}">></script>
+
+{% endblock scripts %}

@@ -1,0 +1,61 @@
+
+{% extends 'master.html' %}
+
+{% load static from staticfiles %}
+
+{% block title %} Reservaciones {% endblock title %}
+
+{% block contenido %}
+
+<div class="container">
+	
+
+	<div class="row">
+		<div class="col-md-12">
+			<div class="page-header">
+				<h4>Reservaciones del: {{ dia }}</h4>
+			</div>
+		</div>
+	</div>
+
+	{% if reservaciones %}
+
+	<div class="table-responsive">
+		<table class="table table-striped table-bordered table-hover table-condensed">
+			<tr>
+				<th>Tragoncito</th> 
+				<th>Entrada</th> 
+				<th>Guarnicion</th> 
+				<th>Plato_fuerte</th> 
+				<th>Ensalada</th> 
+				<th>Postre</th> 
+				<th>Agua</th> 
+				<th>Comentarios</th> 
+				<th>Correo</th> 
+				<th>Empresa</th> 
+			</tr>
+			{% for reservacion in reservaciones %}
+			<tr>
+				<td> {% if reservacion.persona %} {{ reservacion.persona }} {% else %} -- {% endif %}</td> 
+				<td> {% if reservacion.entrada %} {{ reservacion.entrada }} {% else %} -- {% endif %}</td> 
+				<td> {% if reservacion.guarnicion %} {{ reservacion.guarnicion }} {% else %} -- {% endif %}</td> 
+				<td> {% if reservacion.plato_fuerte %} {{ reservacion.plato_fuerte }} {% else %} -- {% endif %}</td> 
+				<td> {% if reservacion.ensalada %} {{ reservacion.ensalada }} {% else %} -- {% endif %}</td> 
+				<td> {% if reservacion.postre %} {{ reservacion.postre }} {% else %} -- {% endif %}</td> 
+				<td> {% if reservacion.agua %} {{ reservacion.agua }} {% else %} -- {% endif %}</td> 
+				<td> {% if reservacion.comentarios %} {{ reservacion.comentarios }} {% else %} -- {% endif %}</td> 
+				<td> {% if reservacion.correo %} {{ reservacion.correo }} {% else %} -- {% endif %}</td> 
+				<td> {% if reservacion.empresa %} {{ reservacion.empresa }} {% else %} -- {% endif %}</td>
+			</tr>
+			{% endfor %}
+		</table>		
+	</div>
+
+	{% else %}
+		<h3>Sin reservaciones este dia</h3>
+	{% endif %}
+
+</div>
+
+
+{% endblock contenido %}

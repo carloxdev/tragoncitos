@@ -1,0 +1,97 @@
+{% load static from staticfiles %}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="utf-8">
+	<title>{% block title %} {% endblock title %}</title>
+
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<link rel="stylesheet" href="{% static 'master.css' %}" />
+	<link rel="stylesheet" href="{% static 'libs/bootstrap/css/bootstrap.css' %}" />
+
+	{% block css %}
+	
+	{% endblock css %}	
+</head>
+<body>
+
+	<header>
+		<nav class="navbar navbar-default">
+			<div class="container-fluid">
+			
+				<div class="navbar-header">
+
+					<a href="{% url 'home.index' %}" class="navbar-brand">JF Gourmet</a>
+
+					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#menu">
+						<span class="sr-only">Menu</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+
+				</div>
+
+				<div class="collapse navbar-collapse" id="menu">
+					<ul class="nav navbar-nav navbar-right">
+						<li><a href="{% url 'home.dashboard' %}">Dashboard</a></li>
+						<li><a href="{% url 'config.alimento_lista' %}">Alimentos</a></li>
+						<li><a href="{% url 'config.menu_lista' %}">Menus</a></li>
+						<li><a href="{% url 'reserva.lista' %}">Reservaciones</a></li>
+
+						{% if user.is_authenticated %}
+						<li class="dropdown">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button">
+								
+								{% if user.username == "comelon" %}
+									Administrador
+								{% else %}
+									{{ user.username }}
+								{% endif %}
+								
+								<span class="caret"></span>
+							</a>
+							<ul class="dropdown-menu">
+								<li><a href="{% url 'home.logout' %}">Salir</a></li>
+							</ul>
+						</li>
+						{% else %}
+						<li><a href="{% url 'home.login' %}">Login</a></li>
+						{% endif %}
+					</ul>
+				</div>
+			</div>
+
+		</nav>
+	</header>
+	{% block contenido %}
+
+	{% endblock contenido %}
+
+ 	<footer>
+ 		<div class="container">
+ 			<div class="row">
+ 				<div class="col-sm-6">
+ 					<p> Desarrollado por: Carlos A. Martinez :) </p>
+ 				</div>
+ 				<div class="col-sm-6">
+ 					<p>
+ 						"Cualquier comentario o queja favor de enviar correo."
+ 					</p>
+ 				</div>
+ 			</div>
+ 		</div>
+ 	</footer>
+
+
+	<script src="{% static 'libs/jquery/jquery_2.2.4.js' %}"></script>
+	<script src="{% static 'libs/bootstrap/js/bootstrap.js' %}"></script>
+	<script src="{% static 'master.js' %}"></script>
+
+	{% block scripts %}
+
+	{% endblock scripts %}
+
+</body>
+</html>
