@@ -20,7 +20,7 @@ urlpatterns = [
         ReservacionNueva.as_view(),
         name='reserva.nueva'
     ),
-    url(r'^reservaciones/gracias/(?P<pk>[0-9])/$',
+    url(r'^reservaciones/gracias/(?P<pk>.*)/$',
         ReservacionGracias.as_view(),
         name='reserva.gracias'
         ),

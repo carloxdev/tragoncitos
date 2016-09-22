@@ -105,6 +105,8 @@ class ReservacionNueva(generic.View):
         postre_pk = request.POST.get('postre')
         agua_pk = request.POST.get('agua')
 
+        import ipdb; ipdb.set_trace() 
+
         # Validar datos
         if persona != '':
             try:
@@ -161,7 +163,7 @@ class ReservacionNueva(generic.View):
                 ))
 
             except Exception, e:
-                error = str(e)
+                mensaje = str(e)
         else:
             try:
                 menu = Menu.objects.get(dia=fecha)
