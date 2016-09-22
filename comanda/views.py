@@ -105,7 +105,7 @@ class ReservacionNueva(generic.View):
         postre_pk = request.POST.get('postre')
         agua_pk = request.POST.get('agua')
 
-        import ipdb; ipdb.set_trace() 
+        # import ipdb; ipdb.set_trace() 
 
         # Validar datos
         if persona != '':
@@ -159,7 +159,7 @@ class ReservacionNueva(generic.View):
 
                 return redirect(reverse(
                     'reserva.gracias',
-                    kwargs={'pk': reservacion.id}
+                    kwargs={'pk': reservacion.pk}
                 ))
 
             except Exception, e:
