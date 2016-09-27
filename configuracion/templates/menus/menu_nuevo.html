@@ -4,22 +4,48 @@
 
 {% block title %} Nuevo Menu {% endblock title %}
 
+{% block css %}
+	<link rel='stylesheet' href="{% static 'menus/menu_nuevo.css' %}" />
+
+{% endblock css %}
+
 {% block contenido %}
 
-	<form action="" method="POST" enctype="multipart/form-data">
+<div class="container-fluid height-full">
 
-		{% csrf_token %}
-		{{ form.as_p }}
-
-		<button type="submit">Guardar</button>
-	</form>
-
-	{% if mensaje %}
-		<div>
-			{{ mensaje }}
-		</div>
+	<div class="row">
 		
-	{% endif %}
+		<div class="col-md-12">
+			
+			<ol class="breadcrumb">
+				<li><a href="{% url 'comanda.reserva_lista' %}">Menus</a></li>
+				<li class="active">Nuevo</li>
+			</ol>
 
+	
+			<div class="row">
+				<div class="col-md-12">
+					<div class="page-header">
+						<h4>Nuevo menu del: <strong>{{fecha}}</strong></h4>
+					</div>
+				</div>
+			</div>
+
+
+			<form action="" method="POST">
+
+				{% csrf_token %}
+				{{ form.as_p }}
+
+				<div class="form-group">
+					<button class="btn btn-primary" type="submit">Guardar</button>	
+				</div>
+
+			</form>
+
+		</div>
+	</div>
+
+</div>
 
 {% endblock contenido %}

@@ -1,0 +1,59 @@
+{% extends 'master.html' %}
+
+{% load static from staticfiles %}
+
+{% block title %} Dashboard {% endblock title %}
+
+{% block contenido %} 
+
+<ol class="breadcrumb">
+	<li><a href="{% url 'home.index' %}">Inicio</a></li>
+	<li class="active">Dashboard</li>
+</ol>
+
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-md-4">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<a href="#">Reservaciones de HOY</a>
+					
+				</div>
+				<div class="panel-body">
+					
+				</div>				
+			</div>
+		</div>
+		
+		<div class="col-md-4">
+
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<a href="#">Reservaciones de la SEMANA</a>
+					
+				</div>
+				<div class="panel-body">
+					
+				</div>
+			</div>
+		</div>
+		
+		<div class="col-md-4">
+
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<a href="#">Reservaciones por DIA</a>
+					
+				</div>
+				<div class="panel-body">
+					
+				</div>	
+			</div>				
+		</div>
+	</div>
+</div>
+
+{% endblock contenido %}
+
+
+

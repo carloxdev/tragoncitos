@@ -7,13 +7,19 @@
 
 {% block css %}
 	<link rel='stylesheet' href="{% static 'libs/fullcalendar/fullcalendar.css' %}" />
-	<link rel="stylesheet" href="{% static 'recervaciones/reservar_nueva.css' %}" />
+	<link rel="stylesheet" href="{% static 'reservaciones/reservar_nueva.css' %}" />
 {% endblock css %}
 
 {% block contenido %}
 
 <form action="" method="POST" role="form">
-	{% csrf_token %}
+{% csrf_token %}
+
+	<ol class="breadcrumb">
+		<li><a href="{% url 'home.index' %}">Inicio</a></li>
+		<li class="active">Nueva reservacion</li>
+	</ol>
+	
 	<div class="container">
 
 		<div class="row">
@@ -252,7 +258,7 @@
 	<script src="{% static 'libs/fullcalendar/fullcalendar.js' %}">></script>
 	<script src="{% static 'libs/fullcalendar/locale/es.js' %}"></script>
 
-	<script src="{% static 'recervaciones/reservar_nueva.js' %}">></script>
+	<script src="{% static 'reservaciones/reservar_nueva.js' %}">></script>
 
 {% endblock scripts %}
 

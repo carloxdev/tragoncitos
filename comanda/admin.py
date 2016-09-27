@@ -11,14 +11,15 @@ from .models import Reservacion
 @admin.register(Reservacion)
 class AdminRestaurante(admin.ModelAdmin):
     list_display = (
+        'dia',
+        'persona',
+        'empresa',
+        'correo',
         'entrada',
         'plato_fuerte',
         'guarnicion',
         'ensalada',
         'postre',
         'agua',
-        'persona',
         'comentarios',
-        'correo',
-        'empresa',
     )

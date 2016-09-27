@@ -4,22 +4,28 @@
 
 {% block title %} Lista de Alimentos {% endblock title %}
 
+{% block css %}
+	<link rel="stylesheet" href="{% static 'alimentos/alimento_lista.css' %}" />
+{% endblock css %}
+
 {% block contenido %}
 
-<div class="container-fluid">
-	<ol class="breadcrumb">
-		<li class="active">Lista de Alimentos</li>
-	</ol>			
+<ol class="breadcrumb">
+	<li><a href="{% url 'home.index' %}">Inicio</a></li>
+	<li class="active">Lista de Alimentos</li>
+</ol>
+
+<div class="container-fluid">			
 
 	<div class="row barra-tareas">
-		<div class="col-md-12">
+		<div class="col-xs-12 col-sm-12 col-md-12">
 			<a href="{% url 'config.alimento_nuevo' %}" class="btn btn-info">Nuevo Alimento</a>
 		</div>
 	</div>
 
 	<div class="row">
 		{% for alimento in alimentos %}
-		<div class="col-md-6">
+		<div class="col-xs-12 col-sm-12 col-md-6">
 			<div class="panel 
 			{% if alimento.activo is True %}
 				panel-success
@@ -34,9 +40,9 @@
 
 						<div class="media-left media-middle">
 							{% if  alimento.foto %}
-							<img src="{{ MEDIA_URL }}{{ alimento.foto }}" class="pull-left foto-alimento thumbnail hidden-sm hidden-xs hidden-md" alt="imagen">
+							<img src="{{ MEDIA_URL }}{{ alimento.foto }}" class="pull-left foto-alimento thumbnail hidden-sm hidden-xs" alt="imagen">
 							{% else %}
-							<img src="{{ MEDIA_URL }}alimentos/no-image.jpg" class="pull-left sin-foto thumbnail hidden-sm hidden-xs hidden-md" alt="imagen">
+							<img src="{{ MEDIA_URL }}alimentos/no-image.jpg" class="pull-left sin-foto thumbnail hidden-sm hidden-xs" alt="imagen">
 							{% endif %}									
 						</div>
 

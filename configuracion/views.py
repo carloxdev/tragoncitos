@@ -5,10 +5,11 @@ from django.shortcuts import render
 from django.views import generic
 from django.shortcuts import redirect
 from django.core.urlresolvers import reverse
+from django.core.urlresolvers import reverse_lazy
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
 
-# Liberias Python
+# Librerias Python:
 from datetime import date
 
 # Modelos
@@ -28,7 +29,7 @@ class AlimentoListView(generic.ListView):
     template_name = 'alimentos/alimento_lista.html'
     model = Alimento
     context_object_name = 'alimentos'
-    paginate_by = 4
+    paginate_by = 5
 
 
 @method_decorator(login_required, name='dispatch')
@@ -76,24 +77,46 @@ class AlimentoConsultar(generic.View):
 # ----------------- MENUS ----------------- #
 
 @method_decorator(login_required, name='dispatch')
-class MenuListView(generic.ListView):
+class MenuListView(generic.View):
 
-    template_name = 'menus/menu_lista.html'
-    model = Menu
-    context_object_name = 'menus'
-    paginate_by = 10
+    def __init__(self):
+        self.template_name = 'menus/menu_lista.html'
+
+    def get(self, request):
+        return render(request, self.template_name, {})
 
 
-@method_decorator(login_required, name='dispatch')
-class MenuCreateView(generic.CreateView):
+# @method_decorator(login_required, name='dispatch')
+# class MenuCreateView(generic.CreateView):
 
-    template_name = 'menus/menu_nuevo.html'
+#     template_name = 'menus/menu_nuevo.html'
 
-    model = Menu
-    form_class = MenuForm
+#     model = Menu
+#     form_class = MenuForm
 
-    def get_success_url(self):
-        return redirect(reverse('config.menu_lista'))
+#     def get_success_url(self):
+#         # return redirect(reverse('config.menu_lista'))
+#         # return '/alimentos/'
+#         return reverse_lazy('config.menu_lista')
+
+
+class MenuCreateView(generic.View):
+
+    def __init__(self):
+        self.template_name = 'menus/menu_nuevo.html'
+
+    def get(self, request, year, month, day):
+
+        fecha = date(int(year), int(month), int(day))
+
+        formulario = MenuForm()
+
+        contexto = {
+            'fecha': fecha,
+            'form': formulario
+        }
+
+        return render(request, self.template_name, contexto)
 
 
 @method_decorator(login_required, name='dispatch')
@@ -105,5 +128,5 @@ class MenuUpdateView(generic.UpdateView):
     form_class = MenuForm
 
     def get_success_url(self):
-        return redirect(reverse('config.menu_lista'))
-
+        # return redirect(reverse('config.menu_lista'))
+        return reverse_lazy('config.menu_lista')

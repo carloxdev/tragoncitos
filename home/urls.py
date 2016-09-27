@@ -17,9 +17,16 @@ urlpatterns = [
         Index.as_view(),
         name='home.index'
     ),
-    url(r'^login/$', Login.as_view(), name='home.login'),
-    url(r'^dashboard/$', Dashboard.as_view(), name='home.dashboard'),
-
+    url(
+        r'^login/$',
+        Login.as_view(),
+        name='home.login'
+    ),
+    url(
+        r'^dashboard/$',
+        Dashboard.as_view(),
+        name='home.dashboard'
+    ),
     url(
         r'^logout/$',
         auth_views.logout,

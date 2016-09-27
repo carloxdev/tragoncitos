@@ -34,7 +34,7 @@ urlpatterns = [
         name='config.alimento_editar'
     ),
     url(
-        r'^alimento/consultar/(?P<pk>[0-9])/$',
+        r'^alimentos/consultar/(?P<pk>[0-9])/$',
         AlimentoConsultar.as_view(),
         name='config.alimento_consultar'
     ),
@@ -49,7 +49,7 @@ urlpatterns = [
     ),
 
     url(
-        r'^menus/nuevo/$',
+        r'^menus/nuevo/(?P<year>\d{4})/(?P<month>\d+)/(?P<day>\d+)/$',
         MenuCreateView.as_view(),
         name='config.menu_nuevo'
     ),

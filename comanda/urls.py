@@ -13,15 +13,15 @@ urlpatterns = [
     url(
         r'^reservaciones/$',
         ReservacionLista.as_view(),
-        name='reserva.lista'
+        name='comanda.reserva_lista'
     ),
     url(
-        r'^reservacion/nueva/(?P<year>\d{4})/(?P<month>\d+)/(?P<day>\d+)/$',
+        r'^reservaciones/nueva/(?P<year>\d{4})/(?P<month>\d+)/(?P<day>\d+)/$',
         ReservacionNueva.as_view(),
-        name='reserva.nueva'
+        name='comanda.reserva_nueva'
     ),
     url(r'^reservaciones/gracias/(?P<pk>.*)/$',
         ReservacionGracias.as_view(),
-        name='reserva.gracias'
+        name='comanda.reserva_gracias'
         ),
 ]

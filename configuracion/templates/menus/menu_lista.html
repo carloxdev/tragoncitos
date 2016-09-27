@@ -4,43 +4,32 @@
 
 {% block title %} Lista de menus {% endblock title %}
 
+{% block css %}
+	<link rel='stylesheet' href="{% static 'libs/fullcalendar/fullcalendar.css' %}" />
+
+{% endblock css %}
+
 {% block contenido %}
 
 <div class="container-fluid">
 	<ol class="breadcrumb">
-		<li class="active">Lista de Menus</li>
+		<li class="active">Menus</li>
 	</ol>			
 
-	<div class="row barra-tareas">
-		<div class="col-md-12">
-			<a href="{% url 'config.menu_nuevo' %}" class="btn btn-info">Nuevo menu</a>
-		</div>
-	</div>
-
-	<div class="row">
-		<div class="col-md-12">
-			<nav>
-			    {% if is_paginated %}
-			        <ul class="pagination">
-			            {% if page_obj.has_previous %}
-			                <li><a href="?page={{ page_obj.previous_page_number }}">&laquo;</a></li>
-			            {% endif %}
-
-			            {% for i in paginator.page_range %}
-			                <li {% if page_obj.number == i %} class="active" {% endif %}>
-			                    <a href="?page={{i}}">{{ i }}</a>
-			                </li>
-			            {% endfor %}
-
-			            {% if page_obj.has_next %}
-			                <li><a href="?page={{ page_obj.next_page_number }}">&raquo;</a></li>
-			            {% endif %}
-			        </ul>
-			    {% endif %}
-			</nav>
-		</div>
+	<div id="calendario">
 	</div>
 	
 </div>
 
 {% endblock contenido %}
+
+
+{% block scripts %}
+	
+	<script src="{% static 'libs/fullcalendar/lib/moment.min.js' %}">></script>
+	<script src="{% static 'libs/fullcalendar/fullcalendar.js' %}">></script>
+	<script src="{% static 'libs/fullcalendar/locale/es.js' %}"></script>
+
+	<script src="{% static 'menus/menu_lista.js' %}">></script>
+
+{% endblock scripts %}

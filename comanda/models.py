@@ -48,11 +48,11 @@ class Reservacion(models.Model):
         null=True
     )
     comentarios = models.TextField(blank=True)
-    correo = models.EmailField(max_length=254)
+    correo = models.EmailField(max_length=254, blank=True)
     empresa = models.CharField(max_length=255, blank=True)
 
     def __str__(self):
-        return "{} : {}".format(self.persona, self.empresa)
+        return "{} : {}".format(self.dia, self.persona, self.empresa)
 
     class Meta:
         verbose_name_plural = 'Reservaciones'

@@ -11,6 +11,11 @@
 
 {% block contenido %}
 
+<ol class="breadcrumb">
+	<li><a href="{% url 'home.index' %}">Inicio</a></li>
+	<li class="active">Gracias</li>
+</ol>
+
 <div class="container">
 	<div class="jumbotron">
 
@@ -70,6 +75,6 @@
 	<script src="{% static 'libs/fullcalendar/fullcalendar.js' %}">></script>
 	<script src="{% static 'libs/fullcalendar/locale/es.js' %}"></script>
 
-	<script src="{% static 'recervaciones/reservar_gracias.js' %}">></script>
+	<script src="{% static 'reservaciones/reservar_gracias.js' %}">></script>
 
 {% endblock scripts %}

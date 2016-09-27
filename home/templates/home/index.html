@@ -8,31 +8,33 @@
 
 {% block css %}
 	<link rel='stylesheet' href="{% static 'libs/fullcalendar/fullcalendar.css' %}" />
+	<link rel='stylesheet' href="{% static 'home/index.css' %}" />
 {% endblock css %}
 
 
 {% block contenido %}
 
+<div class="jumbotron container-fluid">
+	<h1>Hola Tragoncito</h1>
+
+	<p>Este es un sitio para que apartes tu comida, si deseas ver el menu del dia de hoy y/o reservar da click en el siguiente boton</p>
+
+	<form action="" method="POST"> 
+		{% csrf_token %}
+		<p><button class="btn btn-primary btn-lg">Menu de Hoy</button></p>
+	</form>
+	
+</div>
+
 <div class="container">
-
-	<div class="jumbotron">
-		<h1>Hola Tragoncito</h1>
-
-		<p>Este es un sitio para que apartes tu comida, si deseas ver el menu del dia de hoy y/o reservar da click en el siguiente boton</p>
-
-		<form action="" method="POST"> 
-			{% csrf_token %}
-			<p><button class="btn btn-primary btn-lg">Menu de Hoy</button></p>
-		</form>
-		
-	</div>
-
 	<div>
 		<p>
 			O si deseas reservar la comida de otros dias da click en este boton
 		</p>
 
-		<p><a href="#win_calendar" class="btn btn-warning btn-lg" data-toggle="modal">Menus de Otros dias</a></p>
+		<p>
+			<a href="#win_calendar" class="btn btn-warning btn-lg" data-toggle="modal">Menus de Otros dias</a>
+		</p>
 
 		<div class="modal fade" id="win_calendar">
 			<div class="modal-dialog">
@@ -53,7 +55,6 @@
 			</div>
 		</div>
 	</div>
-
 </div>
 
 {% endblock contenido %}
@@ -63,7 +64,6 @@
 	<script src="{% static 'libs/fullcalendar/lib/moment.min.js' %}">></script>
 	<script src="{% static 'libs/fullcalendar/fullcalendar.js' %}">></script>
 	<script src="{% static 'libs/fullcalendar/locale/es.js' %}"></script>
-
-	<script src="{% static 'index.js' %}">></script>
+	<script src="{% static 'home/index.js' %}">></script>
 
 {% endblock scripts %}

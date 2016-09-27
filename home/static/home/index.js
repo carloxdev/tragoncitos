@@ -36,9 +36,7 @@ Sitio.prototype.Click_Dia = function(date, event, view) {
 	mes = date.format("M");
 	dia = date.format("D");
 
-	var url = '/reservacion/nueva/'+anio+'/'+mes+'/'+dia+'/'
-
-	// alert(url);
+	var url = '/reservaciones/nueva/'+anio+'/'+mes+'/'+dia+'/'
 
 	window.location.href = url
 }

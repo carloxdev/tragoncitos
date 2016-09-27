@@ -20,7 +20,7 @@ from datetime import date
 class Index(View):
 
     def __init__(self):
-        self.template_name = 'index.html'
+        self.template_name = 'home/index.html'
 
     def get(self, request):
 
@@ -35,7 +35,7 @@ class Index(View):
         print fecha.year
 
         return redirect(reverse(
-            'reserva.nueva',
+            'comanda.reserva_nueva',
             kwargs={
                 'year': fecha.year,
                 'month': fecha.month,
@@ -47,7 +47,7 @@ class Index(View):
 class Login(View):
 
     def __init__(self):
-        self.template_name = 'login.html'
+        self.template_name = 'home/login.html'
 
     def get(self, request):
 
@@ -85,4 +85,4 @@ class Login(View):
 
 @method_decorator(login_required, name='dispatch')
 class Dashboard(TemplateView):
-    template_name = 'dashboard.html'
+    template_name = 'home/dashboard.html'

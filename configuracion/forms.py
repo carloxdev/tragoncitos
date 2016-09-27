@@ -5,6 +5,13 @@ from django.forms import ModelForm
 from django.forms import Textarea
 from django.forms import TextInput
 from django.forms import Select
+from django.forms import SelectMultiple
+from django.forms import CheckboxSelectMultiple
+from django.forms.extras import SelectDateWidget
+from django.forms import DateField
+from django.contrib.admin.widgets import FilteredSelectMultiple
+from django.forms import ModelMultipleChoiceField
+
 
 # Modelos:
 from .models import Alimento
@@ -26,6 +33,17 @@ class AlimentoForm(ModelForm):
 
 class MenuForm(ModelForm):
 
+    # dia = DateField(widget=SelectDateWidget)
+    # alimentos = ModelMultipleChoiceField(
+    #     queryset=Alimento.objects.all(),
+    #     widget=SelectMultiple
+    # )
+
     class Meta:
         model = Menu
         fields = '__all__'
+        exclude = ['dia']
+        widgets = {
+            'descripcion': TextInput(attrs={'class': 'form-control'}),
+            'alimentos': SelectMultiple(attrs={'class': 'form-control height-full'})
+        }

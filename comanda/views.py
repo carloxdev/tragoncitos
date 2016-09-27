@@ -24,7 +24,7 @@ from configuracion.models import Alimento
 class ReservacionNueva(generic.View):
 
     def __init__(self):
-        self.template_name = 'recervaciones/reservar_nueva.html'
+        self.template_name = 'reservaciones/reservar_nueva.html'
 
     def get(self, request, year, month, day):
 
@@ -105,8 +105,6 @@ class ReservacionNueva(generic.View):
         postre_pk = request.POST.get('postre')
         agua_pk = request.POST.get('agua')
 
-        # import ipdb; ipdb.set_trace() 
-
         # Validar datos
         if persona != '':
             try:
@@ -158,7 +156,7 @@ class ReservacionNueva(generic.View):
                 reservacion.save()
 
                 return redirect(reverse(
-                    'reserva.gracias',
+                    'comanda.reserva_gracias',
                     kwargs={'pk': reservacion.pk}
                 ))
 
@@ -218,7 +216,7 @@ class ReservacionEditar(generic.View):
 class ReservacionGracias(generic.View):
 
     def __init__(self):
-        self.template_name = 'recervaciones/reservar_gracias.html'
+        self.template_name = 'reservaciones/reservar_gracias.html'
 
     def get(self, request, pk):
 
@@ -234,7 +232,7 @@ class ReservacionGracias(generic.View):
 class ReservacionLista(generic.View):
 
     def __init__(self):
-        self.template_name = 'recervaciones/reservar_lista.html'
+        self.template_name = 'reservaciones/reservar_lista.html'
 
     def get(self, request):
 
