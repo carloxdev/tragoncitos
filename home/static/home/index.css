@@ -13,3 +13,15 @@
 .container p {
 	text-align: center;	
 }
+
+.form {
+	width: 60%;
+}
+
+.page-header {
+	text-align: center;
+}
+
+h2, .h2 {
+	text-align: center;	
+}

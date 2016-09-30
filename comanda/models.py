@@ -30,6 +30,12 @@ class Reservacion(models.Model):
         blank=True,
         null=True
     )
+    plato_fuerte_opcional = models.ForeignKey(
+        Alimento,
+        related_name='menu_plato_fuerte_opcional',
+        blank=True,
+        null=True
+    )
     ensalada = models.ForeignKey(
         Alimento,
         related_name='menu_ensalada',

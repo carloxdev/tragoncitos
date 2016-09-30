@@ -26,12 +26,11 @@ class ReservacionNueva(generic.View):
     def __init__(self):
         self.template_name = 'reservaciones/reservar_nueva.html'
 
-    def get(self, request, year, month, day):
-
-        fecha = date(int(year), int(month), int(day))
+    def get_Menu(self, _fecha):
 
         entradas = []
         platos_fuertes = []
+        platos_fuertes_opcional = []
         guarniciones = []
         ensaladas = []
         postres = []
@@ -40,7 +39,7 @@ class ReservacionNueva(generic.View):
         mensaje = ''
 
         try:
-            menu = Menu.objects.get(dia=fecha)
+            menu = Menu.objects.get(dia=_fecha)
 
             alimentos = menu.alimentos.all()
 
@@ -50,6 +49,7 @@ class ReservacionNueva(generic.View):
 
                 elif alimento.tipo == 'FUE':
                     platos_fuertes.append(alimento)
+                    platos_fuertes_opcional.append(alimento)
 
                 elif alimento.tipo == 'GUA':
                     guarniciones.append(alimento)
@@ -67,31 +67,31 @@ class ReservacionNueva(generic.View):
             mensaje = "No existe un Menú para este dia"
 
         contexto = {
-            'dia': fecha,
+            'fecha': _fecha,
             'entradas': entradas,
             'platos_fuertes': platos_fuertes,
+            'platos_fuertes_opcional': platos_fuertes_opcional,
             'guarniciones': guarniciones,
             'ensaladas': ensaladas,
             'postres': postres,
             'aguas': aguas,
-            'mensaje': mensaje
+            'mensaje': mensaje,
         }
+
+        return contexto
+
+    def get(self, request, year, month, day):
+
+        fecha = date(int(year), int(month), int(day))
+
+        contexto = self.get_Menu(fecha)
 
         return render(request, self.template_name, contexto)
 
     def post(self, request, year, month, day):
 
-        entradas = []
-        platos_fuertes = []
-        guarniciones = []
-        ensaladas = []
-        postres = []
-        aguas = []
-
-        mensaje = ''
-        error = ''
-
         fecha = date(int(year), int(month), int(day))
+        error = ''
 
         persona = request.POST.get('id_persona')
         empresa = request.POST.get('id_empresa')
@@ -99,7 +99,8 @@ class ReservacionNueva(generic.View):
         comentarios = request.POST.get('id_comentarios')
 
         entrada_pk = request.POST.get('entrada')
-        plato_fuete_pk = request.POST.get('plato_fuete')
+        plato_fuerte_pk = request.POST.get('plato_fuete')
+        plato_fuerte_opcional_pk = request.POST.get('plato_fuerte_opcional')
         guarnicion_pk = request.POST.get('guarnicion')
         ensalada_pk = request.POST.get('ensalada')
         postre_pk = request.POST.get('postre')
@@ -117,9 +118,14 @@ class ReservacionNueva(generic.View):
                     reservacion.entrada = Alimento.objects.get(
                         pk=entrada_pk.encode('utf-8'))
 
-                if plato_fuete_pk:
+                if plato_fuerte_pk:
                     reservacion.plato_fuerte = Alimento.objects.get(
-                        pk=plato_fuete_pk.encode('utf-8')
+                        pk=plato_fuerte_pk.encode('utf-8')
+                    )
+
+                if plato_fuerte_opcional_pk:
+                    reservacion.plato_fuerte_opcional = Alimento.objects.get(
+                        pk=plato_fuerte_opcional_pk.encode('utf-8')
                     )
 
                 if guarnicion_pk:
@@ -161,48 +167,13 @@ class ReservacionNueva(generic.View):
                 ))
 
             except Exception, e:
-                mensaje = str(e)
+                error = str(e)
         else:
-            try:
-                menu = Menu.objects.get(dia=fecha)
+            error = 'Favor de proporcionar el nombre de la persona que reserva'
 
-                alimentos = menu.alimentos.all()
+        contexto = self.get_Menu(fecha)
 
-                for alimento in alimentos:
-                    if alimento.tipo == 'ENT':
-                        entradas.append(alimento)
-
-                    elif alimento.tipo == 'FUE':
-                        platos_fuertes.append(alimento)
-
-                    elif alimento.tipo == 'GUA':
-                        guarniciones.append(alimento)
-
-                    elif alimento.tipo == 'ENS':
-                        ensaladas.append(alimento)
-
-                    elif alimento.tipo == 'POS':
-                        postres.append(alimento)
-
-                    elif alimento.tipo == 'AGU':
-                        aguas.append(alimento)
-
-                error = 'Favor de proporcionar el nombre de la persona que reserva'
-
-            except Exception:
-                mensaje = "No existe un Menú para este dia"
-
-        contexto = {
-            'dia': fecha,
-            'entradas': entradas,
-            'platos_fuertes': platos_fuertes,
-            'guarniciones': guarniciones,
-            'ensaladas': ensaladas,
-            'postres': postres,
-            'aguas': aguas,
-            'error': error,
-            'mensaje': mensaje
-        }
+        contexto['error'] = error
 
         return render(request, self.template_name, contexto)
 

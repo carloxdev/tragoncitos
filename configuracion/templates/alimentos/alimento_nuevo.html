@@ -6,13 +6,13 @@
 
 {% block contenido %}
 
-<div class="container-fluid">
+<ol class="breadcrumb">
+	<li><a href="{% url 'home.index' %}">Inicio</a></li>
+	<li><a href="{% url 'config.alimento_lista' %}">Alimentos</a></li>
+	<li class="active">Nuevo</li>
+</ol>
 
-	<ol class="breadcrumb">
-		<li><a href="{% url 'home.index' %}">Inicio</a></li>
-		<li><a href="{% url 'config.alimento_lista' %}">Lista de Alimentos</a></li>
-		<li class="active">Nuevo</li>
-	</ol>
+<div class="container">
 
 	<form action="" method="POST" enctype="multipart/form-data">
 

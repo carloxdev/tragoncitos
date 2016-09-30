@@ -30,6 +30,7 @@ INSTALLED_APPS = [
     'home.apps.HomeConfig',
     'configuracion.apps.ConfiguracionConfig',
     'comanda.apps.ComandaConfig',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [

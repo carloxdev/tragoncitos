@@ -20,6 +20,13 @@ from .models import Menu
 from .forms import AlimentoForm
 from .forms import MenuForm
 
+# Api Rest:
+from rest_framework import viewsets
+
+# Serializadores:
+from .serializers import MenuSerializer
+
+
 # ----------------- ALIMENTOS ----------------- #
 
 
@@ -86,20 +93,7 @@ class MenuListView(generic.View):
         return render(request, self.template_name, {})
 
 
-# @method_decorator(login_required, name='dispatch')
-# class MenuCreateView(generic.CreateView):
-
-#     template_name = 'menus/menu_nuevo.html'
-
-#     model = Menu
-#     form_class = MenuForm
-
-#     def get_success_url(self):
-#         # return redirect(reverse('config.menu_lista'))
-#         # return '/alimentos/'
-#         return reverse_lazy('config.menu_lista')
-
-
+@method_decorator(login_required, name='dispatch')
 class MenuCreateView(generic.View):
 
     def __init__(self):
@@ -130,3 +124,10 @@ class MenuUpdateView(generic.UpdateView):
     def get_success_url(self):
         # return redirect(reverse('config.menu_lista'))
         return reverse_lazy('config.menu_lista')
+
+# ----------------- APIS ----------------- #
+
+
+class MenuAPI(viewsets.ModelViewSet):
+    queryset = Menu.objects.all()
+    serializer_class = MenuSerializer

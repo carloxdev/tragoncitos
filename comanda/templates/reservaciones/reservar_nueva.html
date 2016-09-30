@@ -25,7 +25,7 @@
 		<div class="row">
 			<div class="col-md-12">
 				<div class="page-header">
-					<h3>Menu del: <strong>{{ dia }}</strong></h3>
+					<h3>Menu del: <strong>{{ fecha }}</strong></h3>
 				</div>
 			</div>
 		</div>
@@ -63,7 +63,7 @@
 
 		<div class="row">
 			<div class="col-md-12">
-				<ul class="list-group">
+				<ul class="list-group" id="list-platos-fuertes">
 					<li class="list-group-item disabled">PLATOS FUERTES:</li>
 					{% if platos_fuertes %}
 						{% for plato_fuete in platos_fuertes %}
@@ -79,6 +79,25 @@
 				</ul>				
 			</div>						
 		</div>
+
+		<div class="row">
+			<div class="col-md-12">
+				<ul class="list-group" id="list-platos-fuertes-opt">
+					<li class="list-group-item disabled">PLATOS FUERTES (Opcion 2):</li>
+					{% if platos_fuertes_opcional %}
+						{% for plato_fuerte_opcional in platos_fuertes_opcional %}
+						<label class="list-group-item custom-control custom-radio">
+							<input type="radio" name="plato_fuerte_opcional" class="custom-control-input" value="{{plato_fuerte_opcional.pk}}">
+							<span class="custom-control-indicator"></span>
+							<span class="custom-control-description">{{plato_fuerte_opcional.nombre}}</span>
+						</label>							
+						{% endfor %}
+					{% else %}
+						<li class="list-group-item"><h4>Sin Platos Fuertes para este dia</h4></li>
+					{% endif %}
+				</ul>				
+			</div>						
+		</div>		
 
 		<div class="row">
 			<div class="col-md-12">

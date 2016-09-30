@@ -32,6 +32,7 @@
 		<p> 
 			<div> <strong>Entrada:</strong>  {% if reservacion.entrada %} {{ reservacion.entrada }} {% else %} -- {% endif %}</div>
 			<div> <strong>Plato Fuerte:</strong> {% if reservacion.plato_fuerte %} {{ reservacion.plato_fuerte }} {% else %} -- {% endif %}</div>
+			<div> <strong>Plato Fuerte (Opcion 2):</strong> {% if reservacion.plato_fuerte_opcional %} {{ reservacion.plato_fuerte_opcional }} {% else %} -- {% endif %}</div>
 			<div> <strong>Guarnicion:</strong> {% if reservacion.guarnicion %} {{ reservacion.guarnicion }} {% else %} -- {% endif %}</div>
 			<div> <strong>Ensalada: </strong> {% if reservacion.ensalada %} {{ reservacion.ensalada }} {% else %} -- {% endif %}</div>
 			<div> <strong>Postre: </strong> {% if reservacion.postre %} {{ reservacion.postre }} {% else %} -- {% endif %}</div>

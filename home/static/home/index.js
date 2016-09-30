@@ -16,19 +16,23 @@ Sitio.prototype.Init = function () {
 	this.calendario.fullCalendar({
     	weekends: false,
     	locale: 'es',
-    	dayClick: this.Click_Dia,
+    	// dayClick: this.Click_Dia,
+    	eventClick: this.Click_Evento,
+    	viewRender: this.Change_Month,
 	});	
 
 	this.modal.on('shown.bs.modal',this, this.Dibuja_Calendario)	
 }
 Sitio.prototype.Dibuja_Calendario = function(e) {
-
-
- 	// : function() {
-  //       alert('a day has been clicked!');
-  //   }
-
     e.data.calendario.fullCalendar('today');
+
+    var newEvent = new Object();
+	newEvent.title = "Menu";
+	newEvent.start = new Date();
+	newEvent.allDay = true;    
+
+	e.data.calendario.fullCalendar( 'renderEvent', newEvent );
+
 }
 Sitio.prototype.Click_Dia = function(date, event, view) {
 
@@ -39,4 +43,16 @@ Sitio.prototype.Click_Dia = function(date, event, view) {
 	var url = '/reservaciones/nueva/'+anio+'/'+mes+'/'+dia+'/'
 
 	window.location.href = url
+}
+Sitio.prototype.Click_Evento = function(calEvent, jsEvent, view) {
+
+	anio = calEvent.start.format("YYYY")
+	mes = calEvent.start.format("M")
+	dia = calEvent.start.format("D")
+
+	var url = '/comanda/reservaciones/nueva/'+anio+'/'+mes+'/'+dia+'/'
+	window.location.href = url
+}
+Sitio.prototype.Change_Month = function(view, element) {
+	alert("hola")	
 }

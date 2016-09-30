@@ -19,22 +19,22 @@ urlpatterns = [
     # ----------------- ALIMENTOS ----------------- #
 
     url(
-        r'^alimentos/$',
+        r'^configuracion/alimentos/$',
         AlimentoListView.as_view(),
         name='config.alimento_lista'
     ),
     url(
-        r'^alimentos/nuevo/$',
+        r'^configuracion/alimentos/nuevo/$',
         AlimentoCreateView.as_view(),
         name='config.alimento_nuevo'
     ),
     url(
-        r'^alimentos/editar/(?P<pk>[0-9]+)/$',
+        r'^configuracion/alimentos/editar/(?P<pk>[0-9]+)/$',
         AlimentoUpdateView.as_view(),
         name='config.alimento_editar'
     ),
     url(
-        r'^alimentos/consultar/(?P<pk>[0-9])/$',
+        r'^configuracion/alimentos/consultar/(?P<pk>[0-9])/$',
         AlimentoConsultar.as_view(),
         name='config.alimento_consultar'
     ),
@@ -43,20 +43,21 @@ urlpatterns = [
     # ----------------- MENUS ----------------- #
 
     url(
-        r'^menus/$',
+        r'^configuracion/menus/$',
         MenuListView.as_view(),
         name='config.menu_lista'
     ),
 
     url(
-        r'^menus/nuevo/(?P<year>\d{4})/(?P<month>\d+)/(?P<day>\d+)/$',
+        r'^configuracion/menus/nuevo/(?P<year>\d{4})/(?P<month>\d+)/(?P<day>\d+)/$',
         MenuCreateView.as_view(),
         name='config.menu_nuevo'
     ),
 
     url(
-        r'^menus/editar/(?P<pk>[0-9]+)/$',
+        r'^configuracion/menus/editar/(?P<pk>[0-9]+)/$',
         MenuUpdateView.as_view(),
         name='config.menu_editar'
     ),
+
 ]

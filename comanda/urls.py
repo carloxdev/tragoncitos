@@ -11,16 +11,16 @@ from .views import ReservacionLista
 urlpatterns = [
 
     url(
-        r'^reservaciones/$',
+        r'^comanda/reservaciones/$',
         ReservacionLista.as_view(),
         name='comanda.reserva_lista'
     ),
     url(
-        r'^reservaciones/nueva/(?P<year>\d{4})/(?P<month>\d+)/(?P<day>\d+)/$',
+        r'^comanda/reservaciones/nueva/(?P<year>\d{4})/(?P<month>\d+)/(?P<day>\d+)/$',
         ReservacionNueva.as_view(),
         name='comanda.reserva_nueva'
     ),
-    url(r'^reservaciones/gracias/(?P<pk>.*)/$',
+    url(r'^comanda/reservaciones/gracias/(?P<pk>.*)/$',
         ReservacionGracias.as_view(),
         name='comanda.reserva_gracias'
         ),

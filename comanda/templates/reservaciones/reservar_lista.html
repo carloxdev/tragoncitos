@@ -30,7 +30,8 @@
 				<th>Tragoncito</th> 
 				<th>Entrada</th> 
 				<th>Guarnicion</th> 
-				<th>Plato_fuerte</th> 
+				<th>Plato Fuerte</th> 
+				<th>Plato Fuerte (Opcion 2)</th> 
 				<th>Ensalada</th> 
 				<th>Postre</th> 
 				<th>Agua</th> 
@@ -44,6 +45,7 @@
 				<td> {% if reservacion.entrada %} {{ reservacion.entrada }} {% else %} -- {% endif %}</td> 
 				<td> {% if reservacion.guarnicion %} {{ reservacion.guarnicion }} {% else %} -- {% endif %}</td> 
 				<td> {% if reservacion.plato_fuerte %} {{ reservacion.plato_fuerte }} {% else %} -- {% endif %}</td> 
+				<td> {% if reservacion.plato_fuerte_opcional %} {{ reservacion.plato_fuerte_opcional }} {% else %} -- {% endif %}</td> 
 				<td> {% if reservacion.ensalada %} {{ reservacion.ensalada }} {% else %} -- {% endif %}</td> 
 				<td> {% if reservacion.postre %} {{ reservacion.postre }} {% else %} -- {% endif %}</td> 
 				<td> {% if reservacion.agua %} {{ reservacion.agua }} {% else %} -- {% endif %}</td> 

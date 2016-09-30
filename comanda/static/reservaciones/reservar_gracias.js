@@ -23,11 +23,6 @@ Sitio.prototype.Init = function () {
 }
 Sitio.prototype.Dibuja_Calendario = function(e) {
 
-
- 	// : function() {
-  //       alert('a day has been clicked!');
-  //   }
-
     e.data.calendario.fullCalendar('today');
 }
 Sitio.prototype.Click_Dia = function(date, event, view) {
@@ -36,9 +31,7 @@ Sitio.prototype.Click_Dia = function(date, event, view) {
 	mes = date.format("M");
 	dia = date.format("D");
 
-	var url = '/reservaciones/nueva/'+anio+'/'+mes+'/'+dia+'/'
-
-	// alert(url);
+	var url = '/comanda/reservaciones/nueva/'+anio+'/'+mes+'/'+dia+'/'
 
 	window.location.href = url
 }
