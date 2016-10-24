@@ -56,8 +56,7 @@ Sitio.prototype.Init = function () {
 	this.calendario.fullCalendar({
     	weekends: false,
     	locale: 'es',
-    	// dayClick: this.Click_Dia,
-    	eventClick: this.click_Evento,
+    	// eventClick: this.click_Evento,
     	viewRender: this.change_Month,
 	});	
 
@@ -66,16 +65,6 @@ Sitio.prototype.Init = function () {
 Sitio.prototype.dibuja_Calendario = function(e) {
     e.data.calendario.fullCalendar('today');
 
-}
-Sitio.prototype.Click_Dia = function(date, event, view) {
-
-	anio = date.format("YYYY");
-	mes = date.format("M");
-	dia = date.format("D");
-
-	var url = '/reservaciones/nueva/'+anio+'/'+mes+'/'+dia+'/'
-
-	window.location.href = url
 }
 Sitio.prototype.click_Evento = function(calEvent, jsEvent, view) {
 
@@ -106,10 +95,35 @@ Sitio.prototype.change_Month = function(view, element) {
 	
 	datos = st.kFuenteDatos.data();
 
+	var fecha = new Date()
+	var fecha_dia = fecha.getDate()
+	var fecha_mes = fecha.getMonth() + 1
+	var fecha_anio = fecha.getFullYear()
+	var fecha_actual = moment(fecha_anio +"-"+ fecha_mes +"-"+ fecha_dia, "YYYY-MM-DD")
+
 	datos.forEach(function (elemento) {
 		var nuevoEvento = new Object()
-		nuevoEvento.title = "Menu"
-		nuevoEvento.start = elemento.dia + "T00:00:00"
+		nuevoEvento.title = "Menu";
+		nuevoEvento.start = elemento.dia + "T00:00:00";
+
+		var fecha_elemento = moment(elemento.dia, "YYYY-MM-DD");
+
+		// console.log("fecha_actual: " + fecha_actual.format("DD/MM/YYYY"))
+		// console.log("fecha_elemento: " + fecha_elemento.format("DD/MM/YYYY"))
+		// console.log(fecha_elemento.isSameOrAfter(fecha_actual))
+		// console.log(fecha_elemento.isSameOrBefore(fecha_actual))
+
+		if (fecha_elemento.isSameOrAfter(fecha_actual)) {
+			nuevoEvento.color = "#33861A";
+			fecha_elemento_anio = fecha_elemento.format('YYYY')
+			fecha_elemento_mes = fecha_elemento.format('MM')
+			fecha_elemento_dia = fecha_elemento.format('DD')
+			nuevoEvento.url = '/comanda/reservaciones/nueva/'+fecha_elemento_anio+'/'+fecha_elemento_mes+'/'+fecha_elemento_dia+'/'
+		}
+		else {
+			nuevoEvento.color = "#6D7B82";
+		}
+
 		nuevoEvento.allDay = true;
 
 		st.calendario.fullCalendar('renderEvent', nuevoEvento, true)
