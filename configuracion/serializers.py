@@ -12,6 +12,7 @@ class MenuSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Menu
         fields = (
+            'url',
             'dia',
             'descripcion',
         )

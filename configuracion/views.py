@@ -3,8 +3,6 @@
 # Librerias Django:
 from django.shortcuts import render
 from django.views import generic
-from django.shortcuts import redirect
-from django.core.urlresolvers import reverse
 from django.core.urlresolvers import reverse_lazy
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
@@ -22,6 +20,10 @@ from .forms import MenuForm
 
 # Api Rest:
 from rest_framework import viewsets
+from rest_framework import filters
+
+# API Rest Filtros:
+from .filters import MenuFilter
 
 # Serializadores:
 from .serializers import MenuSerializer
@@ -48,8 +50,7 @@ class AlimentoCreateView(generic.CreateView):
     form_class = AlimentoForm
 
     def get_success_url(self):
-        # return redirect(reverse('config.alimento_lista'), safe=False)
-        return '/alimentos/'
+        return reverse_lazy('configuracion.alimento_lista')
 
 
 @method_decorator(login_required, name='dispatch')
@@ -61,8 +62,7 @@ class AlimentoUpdateView(generic.UpdateView):
     form_class = AlimentoForm
 
     def get_success_url(self):
-        # return redirect(reverse('config.alimento_lista'), safe=False)
-        return '/alimentos/'
+        return reverse_lazy('configuracion.alimento_lista')
 
 
 class AlimentoConsultar(generic.View):
@@ -122,8 +122,7 @@ class MenuUpdateView(generic.UpdateView):
     form_class = MenuForm
 
     def get_success_url(self):
-        # return redirect(reverse('config.menu_lista'))
-        return reverse_lazy('config.menu_lista')
+        return reverse_lazy('configuracion.menu_lista')
 
 # ----------------- APIS ----------------- #
 
@@ -131,3 +130,6 @@ class MenuUpdateView(generic.UpdateView):
 class MenuAPI(viewsets.ModelViewSet):
     queryset = Menu.objects.all()
     serializer_class = MenuSerializer
+
+    filter_backends = (filters.DjangoFilterBackend,)
+    filter_class = MenuFilter

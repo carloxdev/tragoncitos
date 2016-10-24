@@ -1,3 +1,7 @@
+var url_dominio = window.location.protocol + '//' + window.location.host + '/'
+var mes = 0
+var anio = 0
+
 $(document).ready ( function () {
 	st = new Sitio()
 })
@@ -5,49 +9,61 @@ $(document).ready ( function () {
 function Sitio() {
 
 	this.calendario = $('#calendario');
-
 	this.modal = $('#win_calendar');
+	this.kFields = null;
+	this.kFuenteDatos = null;
 
 	this.Init();
 }
 Sitio.prototype.Init = function () {
-	
-	$("#list-platos-fuertes label input").change(this, this.Click_Check)
+
+	this.kFields = {
+        dia: { editable: false, type:"string"},
+        descripcion: { editable: false, type: "string" },
+	}
+
+    this.kFuenteDatos = new kendo.data.DataSource({
+
+        serverFiltering: true,
+        transport: {
+            read: {
+                async: false,
+                url: url_dominio + "api/menus/",
+                type: "GET",
+                dataType: "json",
+            },
+            parameterMap: function (data, action) {
+                if (action === "read") {
+
+                    return {
+                        anio: anio,
+                        mes: mes,
+                    };
+                }
+            }
+        },
+        schema: {
+            model: {
+                id: "dia",
+                fields: this.kfields
+            }
+        },
+        error: function (e) {
+            alert("Status: " + e.status + "; Error message: " + e.errorThrown);
+        }
+    });
 
 	this.calendario.fullCalendar({
     	weekends: false,
     	locale: 'es',
-    	dayClick: this.Click_Dia,
+    	// dayClick: this.Click_Dia,
+    	eventClick: this.click_Evento,
+    	viewRender: this.change_Month,
 	});	
 
-	this.modal.on('shown.bs.modal',this, this.Dibuja_Calendario)	
+	this.modal.on('shown.bs.modal',this, this.dibuja_Calendario)
 }
-Sitio.prototype.Click_Check = function(e) {
-
-	valor = e.currentTarget.value
-
-	// Deshabilitar componente
-	check_opt = "#list-platos-fuertes-opt label input[value=XXX]".replace('XXX', valor)
-	$check_opt = $(check_opt)
-
-	// Desmarcar si esta Marcado
-	if ($check_opt.is(':checked')) {
-		$check_opt.prop("checked", false)
-	}
-
-	// Deshabilitar
-	$check_opt.attr("disabled", true);
-
-	// Habilitar los demas
-	other_checks = "#list-platos-fuertes-opt label input[value!=XXX]".replace('XXX', valor)
-	lista = $(other_checks)
-
-	lista.each(function (indice, elemento) {
-		$(elemento).removeAttr("disabled");
-	});
-}
-Sitio.prototype.Dibuja_Calendario = function(e) {
-
+Sitio.prototype.dibuja_Calendario = function(e) {
     e.data.calendario.fullCalendar('today');
 
 }
@@ -57,7 +73,45 @@ Sitio.prototype.Click_Dia = function(date, event, view) {
 	mes = date.format("M");
 	dia = date.format("D");
 
-	var url = '/comanda/reservaciones/nueva/'+anio+'/'+mes+'/'+dia+'/'
+	var url = '/reservaciones/nueva/'+anio+'/'+mes+'/'+dia+'/'
 
 	window.location.href = url
+}
+Sitio.prototype.click_Evento = function(calEvent, jsEvent, view) {
+
+	anio = calEvent.start.format("YYYY")
+	mes = calEvent.start.format("M")
+	dia = calEvent.start.format("D")
+
+	var url = '/comanda/reservaciones/nueva/'+anio+'/'+mes+'/'+dia+'/'
+	window.location.href = url
+}
+Sitio.prototype.change_Month = function(view, element) {
+
+	st.calendario.fullCalendar("removeEvents");
+
+	anio = view.intervalEnd.year()
+
+	if (mes == view.intervalEnd.month()) {
+		mes = view.intervalEnd.month() +1;
+	}
+	else
+	{
+		mes = view.intervalEnd.month();
+	}
+
+	// Buscar Menus x Mes
+	st.kFuenteDatos.data([]);
+	st.kFuenteDatos.read();
+	
+	datos = st.kFuenteDatos.data();
+
+	datos.forEach(function (elemento) {
+		var nuevoEvento = new Object()
+		nuevoEvento.title = "Menu"
+		nuevoEvento.start = elemento.dia + "T00:00:00"
+		nuevoEvento.allDay = true;
+
+		st.calendario.fullCalendar('renderEvent', nuevoEvento, true)
+	});
 }

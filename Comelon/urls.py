@@ -18,10 +18,14 @@ router.register(r'menus', MenuAPI)
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^api/', include(router.urls)),
     url(r'^', include('configuracion.urls')),
     url(r'^', include('comanda.urls')),
     url(r'^', include('home.urls')),
+
+    # API REST
+    url(r'^api/', include(router.urls)),
+    url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework'))
+
 ]
 
 

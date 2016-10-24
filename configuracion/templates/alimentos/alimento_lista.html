@@ -19,7 +19,7 @@
 
 	<div class="row barra-tareas">
 		<div class="col-xs-12 col-sm-12 col-md-12">
-			<a href="{% url 'config.alimento_nuevo' %}" class="btn btn-info">Nuevo Alimento</a>
+			<a href="{% url 'configuracion.alimento_nuevo' %}" class="btn btn-info">Nuevo Alimento</a>
 		</div>
 	</div>
 
@@ -42,7 +42,7 @@
 							{% if  alimento.foto %}
 							<img src="{{ MEDIA_URL }}{{ alimento.foto }}" class="pull-left foto-alimento thumbnail hidden-sm hidden-xs" alt="imagen">
 							{% else %}
-							<img src="{{ MEDIA_URL }}alimentos/no-image.jpg" class="pull-left sin-foto thumbnail hidden-sm hidden-xs" alt="imagen">
+							<img src="{% static 'alimentos/images/no-image.jpg' %}" class="pull-left sin-foto thumbnail hidden-sm hidden-xs" alt="imagen">
 							{% endif %}									
 						</div>
 
@@ -57,7 +57,7 @@
 				</div>
 
 				<div class="panel-footer">
-					<a href="{% url 'config.alimento_editar' alimento.pk %}" class="btn btn-primary">Editar</a>
+					<a href="{% url 'configuracion.alimento_editar' alimento.pk %}" class="btn btn-primary">Editar</a>
 				</div>
 			</div>
 		</div>

@@ -273,10 +273,15 @@
 
 {% block scripts %}
 	
+	<!-- Calendar Js-->
 	<script src="{% static 'libs/fullcalendar/lib/moment.min.js' %}">></script>
 	<script src="{% static 'libs/fullcalendar/fullcalendar.js' %}">></script>
 	<script src="{% static 'libs/fullcalendar/locale/es.js' %}"></script>
 
+	<!-- Kendo Js-->
+	<script src="{% static 'libs/kendo_2015_2_624/js/kendo.web.min.js' %}"></script>
+	
+	<!-- Js del Sitio -->
 	<script src="{% static 'reservaciones/reservar_nueva.js' %}">></script>
 
 {% endblock scripts %}

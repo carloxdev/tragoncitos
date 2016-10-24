@@ -5,9 +5,12 @@
 <head>
 	<meta charset="utf-8">
 	<title>{% block title %} {% endblock title %}</title>
-
+	
+	<!-- Bootstrap -->
 	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
 	<link rel="stylesheet" href="{% static 'libs/bootstrap/css/bootstrap-paper-theme.min.css' %}" />
+
+	<!-- Estilos del sitio -->
 	<link rel="stylesheet" href="{% static 'master.css' %}" />
 
 	{% block css %}
@@ -39,8 +42,8 @@
 
 						{% if user.is_authenticated %}
 						<li><a href="{% url 'home.dashboard' %}">Dashboard</a></li>
-						<li><a href="{% url 'config.alimento_lista' %}">Alimentos</a></li>
-						<li><a href="{% url 'config.menu_lista' %}">Menus</a></li>
+						<li><a href="{% url 'configuracion.alimento_lista' %}">Alimentos</a></li>
+						<li><a href="{% url 'configuracion.menu_lista' %}">Menus</a></li>
 						<li><a href="{% url 'comanda.reserva_lista' %}">Reservaciones</a></li>
 						<li class="dropdown">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button">

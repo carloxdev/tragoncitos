@@ -7,7 +7,17 @@
 {% endblock title %}
 
 {% block css %}
+
+    <!-- Kendo Estilos -->
+    <link rel="stylesheet" href="{% static 'libs/kendo_2015_2_624/styles/kendo.rtl.min.css' %}"/>
+    <link rel="stylesheet" href="{% static 'libs/kendo_2015_2_624/styles/kendo.common-material.min.css' %}"/>
+    <link rel="stylesheet" href="{% static 'libs/kendo_2015_2_624/styles/kendo.material.min.css' %}"/>
+    <link rel="stylesheet" href="{% static 'libs/kendo_2015_2_624/styles/kendo.dataviz.material.min.css' %}"/>
+
+	<!-- Calendar Estilos -->
 	<link rel='stylesheet' href="{% static 'libs/fullcalendar/fullcalendar.css' %}" />
+
+	<!-- Estilos del sitio -->
 	<link rel='stylesheet' href="{% static 'home/index.css' %}" />
 {% endblock css %}
 
@@ -61,9 +71,15 @@
 
 {% block scripts %}
 	
+	<!-- Calendar Js-->
 	<script src="{% static 'libs/fullcalendar/lib/moment.min.js' %}">></script>
 	<script src="{% static 'libs/fullcalendar/fullcalendar.js' %}">></script>
 	<script src="{% static 'libs/fullcalendar/locale/es.js' %}"></script>
+
+	<!-- Kendo Js-->
+	<script src="{% static 'libs/kendo_2015_2_624/js/kendo.web.min.js' %}"></script>
+
+	<!-- Js del Sitio -->
 	<script src="{% static 'home/index.js' %}">></script>
 
 {% endblock scripts %}

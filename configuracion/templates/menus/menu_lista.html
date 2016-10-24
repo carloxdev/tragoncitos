@@ -11,10 +11,12 @@
 
 {% block contenido %}
 
+<ol class="breadcrumb">
+	<li><a href="{% url 'home.index' %}">Inicio</a></li>
+	<li class="active">Menus</li>
+</ol>
+
 <div class="container-fluid">
-	<ol class="breadcrumb">
-		<li class="active">Menus</li>
-	</ol>			
 
 	<div id="calendario">
 	</div>
